@@ -1,9 +1,9 @@
 #include <iostream>
-#include "include/board.hpp"
+#include "include/tictactoe.hpp"
 
 int main(){
-    Board b;
-    b.printBoard();
+    TTT game;
+    game.initialize();
 
     return 0;
 }
