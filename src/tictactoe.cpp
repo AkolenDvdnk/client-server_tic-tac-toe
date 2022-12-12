@@ -75,18 +75,31 @@ void TTT::makeMove(){
 bool TTT::gameOver(){  
     for (int i = 0; i < 3; i++){
         if (board[i][0].getSellStatus() == board[i][1].getSellStatus() && board[i][0].getSellStatus() == board[i][2].getSellStatus()
-        || board[0][i].getSellStatus() == board[1][i].getSellStatus() && board[0][i].getSellStatus() == board[2][i].getSellStatus())
+        || board[0][i].getSellStatus() == board[1][i].getSellStatus() && board[0][i].getSellStatus() == board[2][i].getSellStatus()){
+            printWinner(turn);
             return true;
+        }
         
         if (board[0][0].getSellStatus() == board[1][1].getSellStatus() && board[0][0].getSellStatus() == board[2][2].getSellStatus()
-        || board[0][2].getSellStatus() == board[1][1].getSellStatus() && board[0][2].getSellStatus() == board[2][0].getSellStatus())
+        || board[0][2].getSellStatus() == board[1][1].getSellStatus() && board[0][2].getSellStatus() == board[2][0].getSellStatus()){
+            printWinner(turn);
             return true;
+        }
     }
     
-    if (totalMoves == maxMoves)
+    if (totalMoves == maxMoves){
+        std::cout << "Draw!\n";
         return true;
+    }
 
     return false;
+}
+
+void TTT::printWinner(char player)const{
+    if (turn == 'O')
+        std::cout << "Congratulations! Player with 'X' has won the game\n";
+    else
+        std::cout << "Congratulations! Player with 'O' has won the game\n";
 }
 
 bool TTT::correctNumber(int value){

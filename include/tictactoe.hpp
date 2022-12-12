@@ -9,6 +9,7 @@ class TTT{
 public:
     TTT();
     void printBoard()const;
+    void printWinner(char)const;
     void makeMove();
     bool gameOver();
     bool correctNumber(int);
