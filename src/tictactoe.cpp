@@ -57,20 +57,22 @@ void TTT::makeMove(){
         board[row][col].setMark('X');
         board[row][col].setSellStatus(1);
         turn = 'O';
+        totalMoves++;
+        printBoard();
     } else if (turn == 'O' && board[row][col].getMark() != 'X' && board[row][col].getMark() != 'O'){
         board[row][col].setMark('O');
         board[row][col].setSellStatus(2);
         turn = 'X';
+        totalMoves++;
+        printBoard();
     } else {
         std::cout << "Cell already filled! Choose another one!\n";
         makeMove();
     }
 
-    totalMoves++;
-    printBoard();
 }
 
-bool TTT::gameOver(){
+bool TTT::gameOver(){  
     for (int i = 0; i < 3; i++){
         if (board[i][0].getSellStatus() == board[i][1].getSellStatus() && board[i][0].getSellStatus() == board[i][2].getSellStatus()
         || board[0][i].getSellStatus() == board[1][i].getSellStatus() && board[0][i].getSellStatus() == board[2][i].getSellStatus())
@@ -80,7 +82,10 @@ bool TTT::gameOver(){
         || board[0][2].getSellStatus() == board[1][1].getSellStatus() && board[0][2].getSellStatus() == board[2][0].getSellStatus())
             return true;
     }
- 
+    
+    if (totalMoves == maxMoves)
+        return true;
+
     return false;
 }
 

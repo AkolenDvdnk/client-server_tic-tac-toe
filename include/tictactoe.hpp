@@ -16,7 +16,7 @@ public:
 
 private:
     static const int BSIZE = 3;
-    static const int maxMoves = 8;
+    static const int maxMoves = 9;
     int choice;
     int totalMoves = 0;
     
