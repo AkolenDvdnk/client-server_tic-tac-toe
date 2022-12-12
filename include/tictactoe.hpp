@@ -11,13 +11,14 @@ public:
     void printBoard()const;
     void makeMove();
     bool gameOver();
+    bool correctNumber(int);
     void initialize();
 
 private:
     static const int BSIZE = 3;
     static const int maxMoves = 8;
     int choice;
-    int totalMoves;
+    int totalMoves = 0;
     
     Cell board[BSIZE][BSIZE];
     char turn = 'X';

@@ -36,6 +36,10 @@ void TTT::makeMove(){
         std::cout << "\nPlayer - 2(O) turn: ";
 
     std::cin >> choice;
+    while (!correctNumber(choice)){
+        std::cout << "Invalid Move!\nYour move: ";
+        std::cin >> choice;
+    }
 
     switch (choice){
     case 1: row = 0; col = 0; break;
@@ -47,8 +51,6 @@ void TTT::makeMove(){
     case 7: row = 2; col = 0; break;
     case 8: row = 2; col = 1; break;
     case 9: row = 2; col = 2; break;
-    default:
-        std::cout << "Invalid Move\n";
     }
 
     if (turn == 'X' && board[row][col].getMark() != 'X' && board[row][col].getMark() != 'O'){
@@ -78,15 +80,22 @@ bool TTT::gameOver(){
         || board[0][2].getSellStatus() == board[1][1].getSellStatus() && board[0][2].getSellStatus() == board[2][0].getSellStatus())
             return true;
     }
-
+ 
     return false;
+}
+
+bool TTT::correctNumber(int value){
+    if (value > 0 && value < 10)
+        return true;
+    else
+        return false;
 }
 
 void TTT::initialize(){
     printBoard();
-    
 
     while (!gameOver()){
+        std::cout << totalMoves << std::endl;
         makeMove();
     }
 }
