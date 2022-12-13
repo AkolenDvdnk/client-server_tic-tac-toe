@@ -5,18 +5,23 @@
 
 #include "cell.hpp"
 
+#define BSIZE 3
+
 class TTT{
 public:
     TTT();
     void printBoard()const;
-    void printWinner(char)const;
+    void printWinner()const;
     void makeMove();
+    void initialize();
+    
     bool gameOver();
     bool correctNumber(int);
-    void initialize();
+    bool isMovesLeft();
+    
+    char getTurn();
 
 private:
-    static const int BSIZE = 3;
     static const int maxMoves = 9;
     int choice;
     int totalMoves = 0;
