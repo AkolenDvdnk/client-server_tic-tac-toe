@@ -1,4 +1,5 @@
 #include "../include/tictactoe.hpp"
+#include "../include/ai.hpp"
 
 TTT::TTT(){
     fillBoard();
@@ -16,14 +17,13 @@ void TTT::fillBoard(){
 }
 
 void TTT::printBoard()const{
-    std::cout << std::endl;
+    std::cout << "\n -------------\n";
     for (int i = 0; i < BSIZE; i++){
         std::cout << " | ";
         for (int j = 0; j < BSIZE; j++){
             std::cout << board[i][j].getMark() << " | ";
         }
-
-        std::cout << std::endl << std::endl;
+        std::cout << "\n -------------\n";
     }
 }
 
@@ -76,13 +76,13 @@ bool TTT::gameOver(){
     for (int i = 0; i < 3; i++){
         if (board[i][0].getSellStatus() == board[i][1].getSellStatus() && board[i][0].getSellStatus() == board[i][2].getSellStatus()
         || board[0][i].getSellStatus() == board[1][i].getSellStatus() && board[0][i].getSellStatus() == board[2][i].getSellStatus()){
-            printWinner(turn);
+            printWinner();
             return true;
         }
         
         if (board[0][0].getSellStatus() == board[1][1].getSellStatus() && board[0][0].getSellStatus() == board[2][2].getSellStatus()
         || board[0][2].getSellStatus() == board[1][1].getSellStatus() && board[0][2].getSellStatus() == board[2][0].getSellStatus()){
-            printWinner(turn);
+            printWinner();
             return true;
         }
     }
@@ -95,7 +95,7 @@ bool TTT::gameOver(){
     return false;
 }
 
-void TTT::printWinner(char player)const{
+void TTT::printWinner()const{
     if (turn == 'O')
         std::cout << "Congratulations! Player with 'X' has won the game\n";
     else
@@ -109,11 +109,26 @@ bool TTT::correctNumber(int value){
         return false;
 }
 
-void TTT::initialize(){
-    printBoard();
+bool TTT::isMovesLeft(){
+    if (totalMoves == maxMoves)
+        return true;
+    else    
+        return false;
+}
 
+char TTT::getTurn(){
+    return turn;
+}
+
+void TTT::initialize(){
+    AI ai;
+
+    printBoard();
     while (!gameOver()){
-        std::cout << totalMoves << std::endl;
+        Move bestMove = ai.findBestMove(board);
+        int valBestMove = board[bestMove.row][bestMove.col].getSellStatus();
+        std::cout << "The optimal move is: " << -valBestMove << std::endl;
+
         makeMove();
     }
 }
