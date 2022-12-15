@@ -1,3 +1,6 @@
+#ifndef ai_h
+#define ai_h
+
 #include "tictactoe.hpp"
 #include "cell.hpp"
 
@@ -17,3 +20,5 @@ public:
     
     Move findBestMove(Cell board[BSIZE][BSIZE]);
 };
+
+#endif

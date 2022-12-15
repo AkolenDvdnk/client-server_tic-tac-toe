@@ -126,7 +126,7 @@ Move AI::findBestMove(Cell board[BSIZE][BSIZE]){
         }
     }
 
-    std::cout << "The value of the best move is: " << bestVal << pAI << std::endl;
+    //std::cout << "The value of the best move is: " << bestVal << pAI << std::endl;
 
     return bestMove;
 }

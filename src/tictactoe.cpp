@@ -1,5 +1,7 @@
+#include <chrono>
+#include <thread>
+
 #include "../include/tictactoe.hpp"
-#include "../include/ai.hpp"
 
 TTT::TTT(){
     fillBoard();
@@ -120,15 +122,31 @@ char TTT::getTurn(){
     return turn;
 }
 
+bool TTT::makeMoveAI(Move bestMove){
+    if (turn == 'O'){
+        std::cout << "Computer - 2(O) turn...\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(800));
+        board[bestMove.row][bestMove.col].setMark('O');
+        board[bestMove.row][bestMove.col].setSellStatus(2);
+        turn = 'X';
+        totalMoves++;
+        printBoard();
+        return false;
+    } else {
+        return true;
+    }
+}
+
 void TTT::initialize(){
     AI ai;
 
     printBoard();
     while (!gameOver()){
         Move bestMove = ai.findBestMove(board);
-        int valBestMove = board[bestMove.row][bestMove.col].getSellStatus();
-        std::cout << "The optimal move is: " << -valBestMove << std::endl;
+        // int valBestMove = board[bestMove.row][bestMove.col].getSellStatus();
+        // std::cout << "The optimal move is: " << -valBestMove << std::endl;
 
-        makeMove();
+        if (makeMoveAI(bestMove))
+            makeMove();
     }
 }

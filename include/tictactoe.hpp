@@ -3,9 +3,10 @@
 
 #include <iostream>
 
-#include "cell.hpp"
-
 #define BSIZE 3
+
+#include "cell.hpp"
+#include "ai.hpp"
 
 class TTT{
 public:
@@ -18,6 +19,7 @@ public:
     bool gameOver();
     bool correctNumber(int);
     bool isMovesLeft();
+    bool makeMoveAI(Move);
     
     char getTurn();
 
